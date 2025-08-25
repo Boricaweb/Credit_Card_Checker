@@ -28,16 +28,31 @@ const validateCred = cardNum => {
     if (Array.isArray(cardNum)) {
         const elementType = cardNum.every(element => typeof element === 'number');
         if (elementType) {
-            const reverseNum = cardNum.reverse();
+            cardNum.pop();
+            let reverseNum = cardNum.reverse();
+            for (let i = 0; i < reverseNum.length; i++) {
+                if (i % 2 === 0) {
+                    reverseNum[i] = reverseNum[i] * 2;
+                    if (reverseNum[i] > 9) {
+                        reverseNum[i] = reverseNum[i] - 9;
+                    }
+                }
+            }
+            const checkNum = reverseNum.reduce((accumulator, currentValue) => accumulator + currentValue) % 10;
+            if (checkNum === 0) {
+                return 'valid';
+            } else {
+                return 'invalid';
+            }
         } else {
             return 'invalid data'
         }
     } else {
         return 'Please input an array';
     }    
-}
+};
 
-
+console.log(validateCred([1,2,3,4,5]));
 
 
 
