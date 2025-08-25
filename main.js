@@ -24,7 +24,18 @@ const batch = [valid1, valid2, valid3, valid4, valid5, invalid1, invalid2, inval
 
 
 // Add your functions below:
-
+const validateCred = cardNum => {
+    if (Array.isArray(cardNum)) {
+        const elementType = cardNum.every(element => typeof element === 'number');
+        if (elementType) {
+            const reverseNum = cardNum.reverse();
+        } else {
+            return 'invalid data'
+        }
+    } else {
+        return 'Please input an array';
+    }    
+}
 
 
 
