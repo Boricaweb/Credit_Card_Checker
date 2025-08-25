@@ -56,16 +56,41 @@ console.log(validateCred([1,2,3,4,5]));
 
 //Generate a nested array for invalid card
 const findInvalidCards = cardArray => {
-    let invalidCard = [];
+    let invalidCards = [];
     for (let i = 0; i < cardArray.length; i++) {
         let cardCheck = validateCred(cardArray[i]);
         if (cardCheck === 'invalid') {
-            invalidCard.push(cardArray[i]);
+            invalidCards.push(cardArray[i]);
         }
     }
-    return invalidCard;
+    return invalidCards;
 }
 
-//
+//Generate a nested array of invalid card companies
+const idInvalidCardCompanies = invalidCards => {
+    let invalidComs = [];
+    for (let i = 0; i < invalidCards.length; i++) {
+        if (invalidCards[i][0] === 3) {
+            if (invalidComs.includes('Amex') === false) {
+                invalidComs.push('Amex');
+            }
+        } else if (invalidCards[i][0] === 4) {
+            if (invalidComs.includes('Visa') === false) {
+                invalidComs.push('Visa');
+            }
+        } else if (invalidCards[i][0] === 5) {
+            if (invalidComs.includes('Mastercard') === false) {
+                invalidComs.push('Mastercard');
+            }
+        } else if (invalidCards[i][0] === 6) {
+            if (invalidComs.includes('Discover') === false) {
+                invalidComs.push('Discover');
+            }
+        } else {
+            invalidComs.push('Company not found');
+        }
+    }
+    return invalidComs;
+} 
 
-
+console.log(idInvalidCardCompanies(findInvalidCards(batch)));
