@@ -24,6 +24,7 @@ const batch = [valid1, valid2, valid3, valid4, valid5, invalid1, invalid2, inval
 
 
 // Add your functions below:
+//Check inlavaid card numbers
 const validateCred = cardNum => {
     if (Array.isArray(cardNum)) {
         const elementType = cardNum.every(element => typeof element === 'number');
@@ -51,10 +52,20 @@ const validateCred = cardNum => {
         return 'Please input an array';
     }    
 };
-
 console.log(validateCred([1,2,3,4,5]));
 
+//Generate a nested array for invalid card
+const findInvalidCards = cardArray => {
+    let invalidCard = [];
+    for (let i = 0; i < cardArray.length; i++) {
+        let cardCheck = validateCred(cardArray[i]);
+        if (cardCheck === 'invalid') {
+            invalidCard.push(cardArray[i]);
+        }
+    }
+    return invalidCard;
+}
 
-
+//
 
 
