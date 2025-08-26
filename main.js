@@ -69,9 +69,9 @@ const validateCred = cardNum => {
             }           
             const checkNum = (10 - (reverseNum.reduce((accumulator, currentValue) => accumulator + currentValue) % 10)) % 10;
             if (checkNum === checkDigit) {
-                return 'valid';
+                return true;
             } else {
-                return 'invalid';
+                return false;
             }
         } else {
             return 'invalid data'
@@ -86,7 +86,7 @@ const findInvalidCards = cardArray => {
     let invalidCards = [];
     for (let i = 0; i < cardArray.length; i++) {
         let cardCheck = validateCred(cardArray[i]);
-        if (cardCheck === 'invalid') {
+        if (cardCheck === false) {
             invalidCards.push(cardArray[i]);
         }
     }
